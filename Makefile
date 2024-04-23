@@ -1,15 +1,22 @@
 
 NAME	:= fractol
 CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
-LIBMLX	:= ./lib/MLX42
+LIBMLX	:= ./include/MLX42
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include
+
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-SRCS	:= $(shell find ./src -iname "*.c")
+
+SRCS	:=	./src/fractol.c \
+			./src/calculations.c \
+			./src/getandset.c
+
 OBJS	:= ${SRCS:.c=.o}
 
-all: libmlx $(NAME)
-
+#all: libmlx $(NAME)
+all: 
+	cc include/MLX42/build/libmlx42.a src/fractol.c src/calculations.c -Iinclude -lglfw
+	
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
@@ -31,4 +38,4 @@ re: clean all
 .PHONY: all, clean, fclean, re, libmlx
 
 
-#cc MLX42/build/libmlx42.a fractol.c -Iinclude -lglfw
+#cc include/MLX42/build/libmlx42.a src/fractol.c src/calculations.c -Iinclude -lglfw
