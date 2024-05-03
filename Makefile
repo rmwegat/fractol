@@ -1,41 +1,37 @@
+NAME = fractol
 
-NAME	:= fractol
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
-LIBMLX	:= ./include/MLX42
+CC = cc
 
-HEADERS	:= -I ./include -I $(LIBMLX)/include
+CFLAGS = -Wall -Wextra -Werror  -Ofast -o3
 
-LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+SRCS = src/fractol.c src/calculations.c src/utils.c
 
-SRCS	:=	./src/fractol.c \
-			./src/calculations.c \
-			./src/getandset.c
+OBJS = $(SRCS:.c=.o)
 
-OBJS	:= ${SRCS:.c=.o}
+MLXFLAGS = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
+MLXINCLUDE = include/MLX42/build/libmlx42.a -Iinclude -lglfw
+MLX_REPO_URL = https://github.com/codam-coding-college/MLX42.git
 
-#all: libmlx $(NAME)
-all: 
-	cc include/MLX42/build/libmlx42.a src/fractol.c src/calculations.c -Iinclude -lglfw
-	
-libmlx:
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
-%.o: %.c
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
-
-$(NAME): $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
-
+all:  MLX42 $(NAME)
+$(NAME): $(OBJS) MLX42
+	@$(CC) $(OBJS) -lft $(MLXFLAGS) $(CFLAGS) $(MLXINCLUDE) -o $(NAME)
+MLX42:
+	@if [ ! -d "MLX42" ]; then \
+		git clone $(MLX_REPO_URL) MLX42; \
+		cd include/MLX42 && cmake -B build && cd build && make && cd ../..; \
+	else \
+		echo "MLX already installed"; \
+	fi
+MLXR:
+	rm -rf include/MLX42
 clean:
-	@rm -rf $(OBJS)
-	@rm -rf $(LIBMLX)/build
-
+	rm -f $(OBJS)
 fclean: clean
-	@rm -rf $(NAME)
+	rm -rf include/MLX42
+	rm -f $(NAME)
+re: fclean all
+.PHONY: MLX42
 
-re: clean all
 
-.PHONY: all, clean, fclean, re, libmlx
-
-
-#cc include/MLX42/build/libmlx42.a src/fractol.c src/calculations.c -Iinclude -lglfw
+#cc include/MLX42/build/libmlx42.a src/fractol.c src/calculations.c src/utils.c -Iinclude -lglfw
