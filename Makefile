@@ -2,9 +2,9 @@ NAME = fractol
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror  -Ofast -o3
+CFLAGS = -Wall -Wextra -Werror -Ofast -o3
 
-SRCS = src/fractol.c src/calculations.c src/utils.c
+SRCS = src/fractol.c src/calculations.c src/utils.c src/fractals.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -13,13 +13,13 @@ MLXINCLUDE = include/MLX42/build/libmlx42.a -Iinclude -lglfw
 MLX_REPO_URL = https://github.com/codam-coding-college/MLX42.git
 
 
-all:  MLX42 $(NAME)
+all: MLX42 $(NAME)
 $(NAME): $(OBJS) MLX42
-	@$(CC) $(OBJS) -lft $(MLXFLAGS) $(CFLAGS) $(MLXINCLUDE) -o $(NAME)
+	@$(CC) $(OBJS) $(MLXFLAGS) $(CFLAGS) $(MLXINCLUDE) -o $(NAME)
 MLX42:
 	@if [ ! -d "MLX42" ]; then \
-		git clone $(MLX_REPO_URL) MLX42; \
-		cd include/MLX42 && cmake -B build && cd build && make && cd ../..; \
+		cd include && git clone $(MLX_REPO_URL) MLX42; \
+		cd MLX42 && cmake -B build && cd build && make && cd ../..; \
 	else \
 		echo "MLX already installed"; \
 	fi

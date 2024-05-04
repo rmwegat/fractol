@@ -6,7 +6,7 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:32:36 by rwegat            #+#    #+#             */
-/*   Updated: 2024/05/03 22:09:51 by rwegat           ###   ########.fr       */
+/*   Updated: 2024/05/04 01:51:51 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,6 @@ int32_t	ft_pixel(int iter, char color)
 	return (rgba.r << 24 | rgba.g << 16 | rgba.b << 8 | 255);
 }
 
-int	is_in_mandelbrot(u_int32_t i, u_int32_t y)
-{
-	t_coords	z;
-	t_coords	c;
-	int			current_iter;
-	t_data		*data;
-
-	data = get_data_ptr();
-	current_iter = 0;
-	z.x = 0.0;
-	z.y = 0.0;
-	c.x = (scale_to_map(i, -2, +2, WIDTH) * data->zoom) + data->shift_x;
-	c.y = (scale_to_map(y, +2, -2, HEIGHT) * data->zoom) + data->shift_y;
-	while (current_iter <= PERCISION)
-	{
-		z = vector_add(vector_square(z), c);
-		if ((z.x * z.x) + (z.y * z.y) > MANDELBROT_MAX)
-			return (current_iter);
-		current_iter++;
-	}
-	return (current_iter * (-1));
-}
-
 void ft_create_image(void* param)
 {
 	uint32_t	y;
@@ -63,13 +40,14 @@ void ft_create_image(void* param)
 	t_data		*data;
 
 	data = get_data_ptr();
+	(void)param;
 	i = 0;
 	while (i < IMAGE_WIDTH)
 	{
 		y = 0;
 		while (y < IMAGE_HEIGHT)
 		{
-			iter = is_in_mandelbrot(i, y);
+			iter = is_in_fractal(i, y);
 			if (iter >= 0)
 				data->color = ft_pixel(iter, 'p');
 			else
@@ -86,6 +64,7 @@ void ft_hook_keyboard(void* param)
 	t_data	*data;
 
 	data = get_data_ptr();
+	(void)param;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_UP))
@@ -129,12 +108,14 @@ void	set_center_to_mouse(t_data *data)
 	mlx_get_mouse_pos(data->mlx, &mouse_x, &mouse_y);
 }
 
-int32_t	main(void)
+int32_t	main(int argc, char	**argv)
 {
 	t_data	*data;
 
+	if (!argv[0] || !argv[1])
+		return (1);
 	data = get_data_ptr();
-	data_init();
+	data_init(argc, argv);
 	if (!(data->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", false)))
 		return(EXIT_FAILURE);
 	if (!(data->image = mlx_new_image(data->mlx, IMAGE_WIDTH, IMAGE_HEIGHT)))

@@ -6,7 +6,7 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:26:18 by rwegat            #+#    #+#             */
-/*   Updated: 2024/04/29 19:15:04 by rwegat           ###   ########.fr       */
+/*   Updated: 2024/05/04 01:33:16 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,13 @@ typedef struct s_data
 	mlx_image_t	*image;
 	t_mouse		*mouse;
 	uint32_t	color;
+	char		*name;
 	double		zoom;
 	double		move_amount;
 	double		shift_x;
 	double		shift_y;
+	double		julia_r;
+	double		julia_i;
 }	t_data;
 
 //****		maths		****
@@ -70,12 +73,14 @@ t_coords	vector_add(t_coords z1, t_coords z2);
 //****		utils		****
 
 t_data		*get_data_ptr(void);
-void		data_init(void);
+void		data_init(int argc, char **argv);
+double		atod(char *s);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
 
 //****		drawing		****
 
 void		ft_create_image(void* param);
-int			is_in_mandelbrot(u_int32_t i, u_int32_t y);
+int			is_in_fractal(u_int32_t i, u_int32_t y);
 int32_t		ft_pixel(int shift, char color);
 
 #endif
