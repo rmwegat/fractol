@@ -6,16 +6,15 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 17:39:40 by rwegat            #+#    #+#             */
-/*   Updated: 2024/04/18 18:09:55 by rwegat           ###   ########.fr       */
+/*   Updated: 2024/05/06 02:22:31 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 
-double	scale_to_map(double unscaled, double new_min, \
-double new_max, double old_max)
+double	scale_to_map(double unscaled, double old_max)
 {
-	return ((new_max - new_min) *(unscaled - 0) / old_max + new_min);
+	return (MANDELBROT_MAX * unscaled / old_max - (MANDELBROT_MAX/2));
 }
 
 t_coords	vector_add(t_coords z1, t_coords z2)

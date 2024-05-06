@@ -6,7 +6,7 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:26:18 by rwegat            #+#    #+#             */
-/*   Updated: 2024/05/04 01:33:16 by rwegat           ###   ########.fr       */
+/*   Updated: 2024/05/06 02:27:17 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 # define WIDTH 720
 # define HEIGHT 720
-# define IMAGE_HEIGHT 1024
-# define IMAGE_WIDTH 1024
+# define IMAGE_HEIGHT 720
+# define IMAGE_WIDTH 720
 # define PERCISION 42
 # define MANDELBROT_MAX 4
 
@@ -65,8 +65,7 @@ typedef struct s_data
 
 //****		maths		****
 
-double		scale_to_map(double unscaled, double new_min, \
-						double new_max, double old_max);
+double		scale_to_map(double unscaled, double old_max);
 t_coords	vector_square(t_coords z);
 t_coords	vector_add(t_coords z1, t_coords z2);
 
