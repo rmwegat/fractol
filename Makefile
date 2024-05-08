@@ -4,7 +4,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -Ofast -o3
 
-SRCS = src/fractol.c src/calculations.c src/utils.c src/fractals.c
+SRCS = src/main.c src/calculations.c src/utils.c src/fractals.c src/inits.c
 
 OBJS = $(SRCS:.c=.o)
 

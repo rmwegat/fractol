@@ -6,7 +6,7 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:26:18 by rwegat            #+#    #+#             */
-/*   Updated: 2024/05/06 02:27:17 by rwegat           ###   ########.fr       */
+/*   Updated: 2024/05/08 15:49:50 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct s_coords
 {
 	double	x;
 	double	y;
-	int		counter;
 }	t_coords;
 
 typedef struct s_color
@@ -55,6 +54,7 @@ typedef struct s_data
 	t_mouse		*mouse;
 	uint32_t	color;
 	char		*name;
+	int			current_iter;
 	double		zoom;
 	double		move_amount;
 	double		shift_x;
@@ -73,12 +73,13 @@ t_coords	vector_add(t_coords z1, t_coords z2);
 
 t_data		*get_data_ptr(void);
 void		data_init(int argc, char **argv);
+int32_t		data_mlx_init(void);
 double		atod(char *s);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 
 //****		drawing		****
 
-void		ft_create_image(void* param);
+void		ft_create_image(void *param);
 int			is_in_fractal(u_int32_t i, u_int32_t y);
 int32_t		ft_pixel(int shift, char color);
 

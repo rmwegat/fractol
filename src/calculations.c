@@ -6,7 +6,7 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 17:39:40 by rwegat            #+#    #+#             */
-/*   Updated: 2024/05/06 02:22:31 by rwegat           ###   ########.fr       */
+/*   Updated: 2024/05/08 15:35:42 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 double	scale_to_map(double unscaled, double old_max)
 {
-	return (MANDELBROT_MAX * unscaled / old_max - (MANDELBROT_MAX/2));
+	return (MANDELBROT_MAX * unscaled / old_max - (MANDELBROT_MAX / 2));
 }
 
 t_coords	vector_add(t_coords z1, t_coords z2)
