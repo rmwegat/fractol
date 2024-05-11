@@ -6,7 +6,7 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:32:36 by rwegat            #+#    #+#             */
-/*   Updated: 2024/05/11 01:36:27 by rwegat           ###   ########.fr       */
+/*   Updated: 2024/05/11 19:18:59 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	check_input(int argc, char **argv)
 	int	len;
 
 	len = ft_strlen(argv[1]);
-	if (len != 10 && len != 5 && len != 5)
+	if (len != 10 && len != 11 && len != 5)
 		put_usage();
 	if (ft_strcmp(argv[1], "mandelbrot") != 0 && \
 		ft_strcmp(argv[1], "burningship") != 0 && \

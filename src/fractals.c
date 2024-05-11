@@ -6,7 +6,7 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 00:54:52 by rwegat            #+#    #+#             */
-/*   Updated: 2024/05/11 00:31:54 by rwegat           ###   ########.fr       */
+/*   Updated: 2024/05/11 19:10:24 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	is_in_fractal(u_int32_t i, u_int32_t y)
 	{
 		if (!ft_strcmp(data->name, "burningship"))
 		{
-			temp.x = z.x * z.x - z.y * z.y + c.x;
+			temp.x = fabs(z.x * z.x - z.y * z.y + c.x);
 			temp.y = fabs(2 * z.x * z.y) + c.y;
 			z.y = temp.y;
 			z.x = temp.x;

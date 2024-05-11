@@ -6,7 +6,7 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:02:02 by rwegat            #+#    #+#             */
-/*   Updated: 2024/05/11 02:01:07 by rwegat           ###   ########.fr       */
+/*   Updated: 2024/05/11 19:15:44 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ void	data_init(int argc, char **argv)
 		data->julia_r = atod(argv[3]);
 		if ((data->julia_i > 2.0 || data->julia_i < -2.0) || \
 			(data->julia_r > 2.0 || data->julia_r < -2.0))
+		{
+			write(1, "4", 1);
 			put_usage();
+		}
 	}
 }
 

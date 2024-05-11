@@ -1,2 +1,4 @@
-template
 include/MLX42
+.o
+.a
+fractol
