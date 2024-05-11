@@ -4,7 +4,12 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -Ofast -o3
 
-SRCS = src/main.c src/calculations.c src/utils.c src/fractals.c src/inits.c
+SRCS =	src/main.c \
+		src/calculations.c \
+		src/utils.c \
+		src/fractals.c \
+		src/inits.c \
+		src/hooks.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -32,6 +37,3 @@ fclean: clean
 	rm -f $(NAME)
 re: fclean all
 .PHONY: MLX42
-
-
-#cc include/MLX42/build/libmlx42.a src/fractol.c src/calculations.c src/utils.c -Iinclude -lglfw

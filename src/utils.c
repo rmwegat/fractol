@@ -6,7 +6,7 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 23:22:42 by rwegat            #+#    #+#             */
-/*   Updated: 2024/05/08 14:02:12 by rwegat           ###   ########.fr       */
+/*   Updated: 2024/05/11 00:44:51 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@ t_data	*get_data_ptr(void)
 	static t_data	data;
 
 	return (&data);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
 
 double	extract_double(char *s)
@@ -65,22 +75,19 @@ double	atod(char *s)
 	return (result);
 }
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	const unsigned char	*str1;
 	const unsigned char	*str2;
 
 	str1 = (const unsigned char *)s1;
 	str2 = (const unsigned char *)s2;
-	while (n && *str1)
+	while (*str1 && *str2)
 	{
-		if (*str1 - *str2)
+		if (*str1 != *str2)
 			return (*str1 - *str2);
 		str1++;
 		str2++;
-		n--;
 	}
-	if (n)
-		return (*str1 - *str2);
-	return (0);
+	return (*str1 - *str2);
 }

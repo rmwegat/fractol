@@ -6,7 +6,7 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:02:02 by rwegat            #+#    #+#             */
-/*   Updated: 2024/05/08 14:10:05 by rwegat           ###   ########.fr       */
+/*   Updated: 2024/05/11 02:01:07 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,21 @@ void	data_init(int argc, char **argv)
 	data->move_amount = 0.5;
 	data->shift_x = 0;
 	data->shift_y = 0;
-	if ((argc == 2 && !ft_strncmp(argv[1], "mandelbrot", 11)) \
-		|| (argc == 4 && !ft_strncmp(argv[1], "julia", 6)) \
-		|| (argc == 2 && !ft_strncmp(argv[1], "burningship", 12)))
+	data->base_color.r = 0;
+	data->base_color.g = 0;
+	data->base_color.b = 0;
+	if ((argc == 2 && !ft_strcmp(argv[1], "mandelbrot")) \
+		|| (argc == 4 && !ft_strcmp(argv[1], "julia")) \
+		|| (argc == 2 && !ft_strcmp(argv[1], "burningship")))
 	{
 		data->name = argv[1];
 		if (!argv[2] || !argv[3])
 			return ;
 		data->julia_i = atod(argv[2]);
 		data->julia_r = atod(argv[3]);
+		if ((data->julia_i > 2.0 || data->julia_i < -2.0) || \
+			(data->julia_r > 2.0 || data->julia_r < -2.0))
+			put_usage();
 	}
 }
 
